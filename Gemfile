@@ -39,6 +39,12 @@ gem "kamal", ">= 2.0.0.rc2", require: false
 # Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
 gem "thruster", require: false
 
+# Use ActiveModel has_secure_password
+gem "bcrypt", "~> 3.1.7"
+
+# RFC-5545 iCalendar
+gem "icalendar", "~> 2.10.0"
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
