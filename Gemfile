@@ -45,6 +45,9 @@ gem "bcrypt", "~> 3.1.7"
 # RFC-5545 iCalendar
 gem "icalendar", "~> 2.10.0"
 
+# required for authorization
+gem "cancancan", "~> 3.6.0"
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
