@@ -88,8 +88,7 @@ builder:
 
 # Use a different ssh user than root
 ssh:
-  user:
-    - DEPLOY_USER
+  user: "deploy"
 
 # Use accessory services (secrets come from .kamal/secrets).
 accessories:
@@ -98,7 +97,6 @@ accessories:
     host: 188.245.123.132
     port: "127.0.0.1:5432:5432"
     env:
-      clear:
       secret:
         - POSTGRES_USER
         - POSTGRES_PASSWORD
