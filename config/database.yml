@@ -60,6 +60,7 @@ production:
   primary: &primary_production
     <<: *default
     database: example_production
+    host: <%= ENV["DB_HOST"] %>
   cache:
     <<: *primary_production
     database: example_production_cache
