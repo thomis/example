@@ -96,7 +96,7 @@ accessories:
   db:
     image: postgres:17
     host: 188.245.123.132
-    port: "127.0.0.1:5432:5432
+    port: "127.0.0.1:5432:5432"
     env:
       clear:
       secret:
