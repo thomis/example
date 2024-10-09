@@ -98,7 +98,7 @@ accessories:
     port: "127.0.0.1:5432:5432"
     env:
       clear:
-        - POSTGRES_DB: "example_production"
+        POSTGRES_DB: "example_production"
       secret:
         - POSTGRES_USER
         - POSTGRES_PASSWORD
