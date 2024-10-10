@@ -47,7 +47,7 @@ env:
     # WEB_CONCURRENCY: 2
 
     # Match this to any external database server to configure Active Record correctly
-    DB_HOST: "example-db"
+    DB_HOST: "host.docker.internal"
 
     # Log everything from Rails
     # RAILS_LOG_LEVEL: debug
@@ -91,19 +91,19 @@ ssh:
   user: "deploy"
 
 # Use accessory services (secrets come from .kamal/secrets).
-accessories:
-  db:
-    image: postgres:17
-    host: 188.245.123.132
-    port: "127.0.0.1:5432:5432"
-    env:
-      clear:
-        POSTGRES_DB: "example_production"
-      secret:
-        - POSTGRES_USER
-        - POSTGRES_PASSWORD
-    files:
-      # - config/mysql/production.cnf:/etc/mysql/my.cnf
-      - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
-    directories:
-      - data:/var/lib/pgsql/data
+# accessories:
+#   db:
+#     image: postgres:17
+#     host: 188.245.123.132
+#     port: "127.0.0.1:5432:5432"
+#     env:
+#       clear:
+#         POSTGRES_DB: "example_production"
+#       secret:
+#         - POSTGRES_USER
+#         - POSTGRES_PASSWORD
+#     files:
+#       # - config/mysql/production.cnf:/etc/mysql/my.cnf
+#       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
+#     directories:
+#       - data:/var/lib/pgsql/data
