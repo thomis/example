@@ -47,7 +47,7 @@ env:
     # WEB_CONCURRENCY: 2
 
     # Match this to any external database server to configure Active Record correctly
-    DB_HOST: "host.docker.internal"
+    DB_HOST: "172.17.0.1"
 
     # Log everything from Rails
     # RAILS_LOG_LEVEL: debug
