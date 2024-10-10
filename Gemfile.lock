@@ -122,7 +122,7 @@ GEM
       ice_cube (~> 0.16)
       ostruct
     ice_cube (0.17.0)
-    importmap-rails (2.0.2)
+    importmap-rails (2.0.3)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
