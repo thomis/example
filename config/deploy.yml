@@ -106,4 +106,4 @@ accessories:
       # - config/mysql/production.cnf:/etc/mysql/my.cnf
       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
     directories:
-      - data:/var/lib/pgsql/17/data
+      - data:/var/lib/postgresql/data
