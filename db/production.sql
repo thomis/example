@@ -1,4 +1,4 @@
-CREATE DATABASE example_production;
-CREATE DATABASE example_production_cache;
-CREATE DATABASE example_production_queue;
-CREATE DATABASE example_production_cable;
+CREATE DATABASE example_production owner deploy;
+CREATE DATABASE example_production_cache owner deploy;
+CREATE DATABASE example_production_queue owner deploy;
+CREATE DATABASE example_production_cable owner deploy;

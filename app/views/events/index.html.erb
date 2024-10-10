@@ -4,7 +4,7 @@
       <div class="text-slate-400 mt-4">Total events: <%= @events.size %></div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center gap-6 mt-2">
         <% @events.each do |event| %>
-          <div class="w-full h-52 bg-gray-800 bg-opacity-60 backdrop-blur-xl hover:bg-opacity-90 p-4 rounded-md cursor-pointer text-white font-light">
+          <div class="w-full h-52 bg-gray-800 bg-opacity-60 backdrop-blur-xl hover:bg-opacity-90 py-4 px-5 rounded-md cursor-pointer text-white font-light">
             <div class="flex flex-col justify-between h-full gap-2">
               <div class="text-2xl"><%= event.name %></div>
               <div class="flex gap-2 items-center">
