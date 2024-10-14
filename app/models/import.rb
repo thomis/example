@@ -8,10 +8,10 @@ class Import
   def process
     json_load(JSON.parse(@raw_data))
 
-    [:notice, "Data have been imported"]
+    [ :notice, "Data have been imported" ]
   rescue => e
     AppLogger.error("Unexpected exception: #{e}\n\n#{e.backtrace}")
-    [:alert, "Unexpected exception: #{e}"]
+    [ :alert, "Unexpected exception: #{e}" ]
   end
 
   private
@@ -35,7 +35,7 @@ class Import
 
       Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
         return_value = wait_thr.value
-        error_message = [stdout.read, stderr.read].compact.join("; ")
+        error_message = [ stdout.read, stderr.read ].compact.join("; ")
       end
 
       if return_value.success?

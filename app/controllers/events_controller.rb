@@ -1,16 +1,16 @@
 class EventsController < ApplicationController
   # before_action :authorize
   # authorize_resource :class => false
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :release, :cancel, :change_person_status, :resync_invitees, :send_invitations, :email]
-  before_action :validate_and_set_filter, only: [:show]
+  before_action :set_event, only: [ :show, :edit, :update, :destroy, :release, :cancel, :change_person_status, :resync_invitees, :send_invitations, :email ]
+  before_action :validate_and_set_filter, only: [ :show ]
 
   def index
-    # if current_person.administrator?
+      # if current_person.administrator?
       @events = Event.drafted.sorted
       @events += Event.released.sorted
       @events += Event.archived.recent.reverse_sorted
     # else
-      # @events = Event.released.recent.sorted
+    # @events = Event.released.recent.sorted
     # end
   end
 
@@ -44,7 +44,7 @@ class EventsController < ApplicationController
     @event.status_id = 1
 
     @event.group.people.active.each do |person|
-      @event.invitees.build({creator_id: 0, updator_id: 0, status_id: STATUS_NO_RESPONSE, person_id: person.id})
+      @event.invitees.build({ creator_id: 0, updator_id: 0, status_id: STATUS_NO_RESPONSE, person_id: person.id })
     end
 
     if @event.save
@@ -64,7 +64,7 @@ class EventsController < ApplicationController
 
       # # add persons from new group
       Group.find(event_params[:group_id]).people.active.each do |person|
-        @event.invitees.create({creator_id: 0, updator_id: 0, status_id: STATUS_NO_RESPONSE, person_id: person.id})
+        @event.invitees.create({ creator_id: 0, updator_id: 0, status_id: STATUS_NO_RESPONSE, person_id: person.id })
       end
     end
 
@@ -126,10 +126,10 @@ class EventsController < ApplicationController
         if @event.save
           msg = "Event [#{@event.name}] was successfully released"
 
-          SendInvitation.enqueue(@event.id, job_options: {run_at: @event.send_invitation_at}) if @event.send_invitation_at.present?
-          SendCancellation.enqueue(@event.id, false, job_options: {run_at: @event.send_cancellation_at}) if @event.send_cancellation_at.present?
-          SendComplete.enqueue(@event.id, job_options: {run_at: @event.until})
-          SendNextEvent.enqueue(@event.id, job_options: {run_at: @event.until}) if @event.next_event.present?
+          SendInvitation.enqueue(@event.id, job_options: { run_at: @event.send_invitation_at }) if @event.send_invitation_at.present?
+          SendCancellation.enqueue(@event.id, false, job_options: { run_at: @event.send_cancellation_at }) if @event.send_cancellation_at.present?
+          SendComplete.enqueue(@event.id, job_options: { run_at: @event.until })
+          SendNextEvent.enqueue(@event.id, job_options: { run_at: @event.until }) if @event.next_event.present?
 
         else
           msg = "Event [#{@event.name}] could not be released: #{@event.errors.full_messages.join(", ")}"
@@ -145,7 +145,7 @@ class EventsController < ApplicationController
   def cancel
     ActiveRecord::Base.transaction do
       @event.delete_jobs
-      SendCancellation.enqueue(@event.id, true, job_options: {priority: 80})
+      SendCancellation.enqueue(@event.id, true, job_options: { priority: 80 })
     end
 
     msg = "Event [#{@event.name}] cancel request has been enqueued"
@@ -159,7 +159,7 @@ class EventsController < ApplicationController
 
     # adding missing people
     @event.missing_people.each do |person|
-      @event.invitees.create({creator_id: 0, updator_id: 0, status_id: STATUS_NO_RESPONSE, person_id: person.id})
+      @event.invitees.create({ creator_id: 0, updator_id: 0, status_id: STATUS_NO_RESPONSE, person_id: person.id })
     end
 
     # removing removed people
@@ -204,7 +204,7 @@ class EventsController < ApplicationController
   end
 
   def validate_and_set_filter
-    valid_filters = [nil, "declined", "no_response", "all", "comments"]
+    valid_filters = [ nil, "declined", "no_response", "all", "comments" ]
     valid_filters << "tentative" if @event.allow_tentative_selection
 
     unless valid_filters.include?(params[:filter])

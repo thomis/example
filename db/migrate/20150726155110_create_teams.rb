@@ -13,7 +13,7 @@ class CreateTeams < ActiveRecord::Migration[4.2]
       t.column "updated_at", "timestamp with time zone", null: false
     end
 
-    add_index :teams, [:name], unique: true
+    add_index :teams, [ :name ], unique: true
     execute "alter table teams add foreign key (type_id) references types(id)"
     execute "alter table teams add foreign key (creator_id) references people(id)"
     execute "alter table teams add foreign key (updator_id) references people(id)"

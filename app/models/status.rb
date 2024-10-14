@@ -2,7 +2,7 @@ class Status < ApplicationRecord
   normalizes :name, with: ->(name) { name.strip.upcase }
 
   validates :name, :type_id, presence: true
-  validates :name, uniqueness: {scope: :type}
+  validates :name, uniqueness: { scope: :type }
 
   belongs_to :type
 

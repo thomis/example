@@ -20,7 +20,7 @@ class Holiday < ApplicationRecord
   end
 
   def self.remove_old
-    Holiday.where(['"to" < ?', 7.days.ago]).each do |holiday|
+    Holiday.where([ '"to" < ?', 7.days.ago ]).each do |holiday|
       AppLogger.info("Old holiday [#{holiday.name}] has been deleted")
       holiday.destroy
     end
@@ -29,17 +29,17 @@ class Holiday < ApplicationRecord
   def self.generate(year = Date.today.year)
     holidays = [
       # moving holidays
-      ["Gründonnerstag/Karfreitag", holy_thursday(year), good_friday(year)],
-      ["Ostern/Ostermontag", easter(year), easter_monday(year)],
-      ["Pfingsten/Pfingstmontag", whit_sunday(year), whit_monday(year)],
-      ["Auffahrt/Freitag nach Auffahrt", ascension_day(year), ascension_day(year) + 1.day],
-      ["Basler Fasnacht", morgenstraich(year), morgenstraich(year) + 2.days],
+      [ "Gründonnerstag/Karfreitag", holy_thursday(year), good_friday(year) ],
+      [ "Ostern/Ostermontag", easter(year), easter_monday(year) ],
+      [ "Pfingsten/Pfingstmontag", whit_sunday(year), whit_monday(year) ],
+      [ "Auffahrt/Freitag nach Auffahrt", ascension_day(year), ascension_day(year) + 1.day ],
+      [ "Basler Fasnacht", morgenstraich(year), morgenstraich(year) + 2.days ],
 
       # fixed holidays
-      ["Tag der Arbeit", Date.new(year, 5, 1), Date.new(year, 5, 1)],
-      ["Nationalfeiertag", Date.new(year, 8, 1), Date.new(year, 8, 1)],
-      ["Heiliger Abend/Weihnachten/Stephanstag", Date.new(year, 12, 24), Date.new(year, 12, 26)],
-      ["Silvester/Neujahr", Date.new(year, 12, 31), Date.new(year + 1, 1, 1)]
+      [ "Tag der Arbeit", Date.new(year, 5, 1), Date.new(year, 5, 1) ],
+      [ "Nationalfeiertag", Date.new(year, 8, 1), Date.new(year, 8, 1) ],
+      [ "Heiliger Abend/Weihnachten/Stephanstag", Date.new(year, 12, 24), Date.new(year, 12, 26) ],
+      [ "Silvester/Neujahr", Date.new(year, 12, 31), Date.new(year + 1, 1, 1) ]
     ]
 
     holidays.each do |name, from, to|

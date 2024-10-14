@@ -5,7 +5,7 @@ class Event < ApplicationRecord
 
   validates :name, :when, :until, :group_id, :status_id, :creator_id, :updator_id, presence: true
   validates :next_event, :required_people,
-    numericality: {only_integer: true, greater_than: 0, allow_blank: true}
+    numericality: { only_integer: true, greater_than: 0, allow_blank: true }
   validate :invitation_and_cancellation
 
   belongs_to :team
@@ -22,9 +22,9 @@ class Event < ApplicationRecord
 
   scope :drafted, -> { where(status_id: STATUS_DRAFT) }
   scope :released, -> { where(status_id: STATUS_RELEASED) }
-  scope :archived, -> { where(status_id: [STATUS_CANCELLED, STATUS_COMPLETED]) }
+  scope :archived, -> { where(status_id: [ STATUS_CANCELLED, STATUS_COMPLETED ]) }
 
-  scope :recent, -> { where([' "when" > ?', 1.day.ago]) }
+  scope :recent, -> { where([ ' "when" > ?', 1.day.ago ]) }
 
   scope :sorted, -> { order(Arel.sql(' "when" asc, name, id desc')) }
   scope :reverse_sorted, -> { order(Arel.sql(' "when" desc, name, id desc')) }
@@ -92,12 +92,12 @@ class Event < ApplicationRecord
     # if some emails where not sent trigger it again
     if invitees.failed_delivery.size > 0
       AppLogger.info("Event [#{name}]: some invitations could not be delivered. we try again in 5 minutes")
-      SendInvitation.enqueue(id, job_options: {run_at: Time.now + 5.minutes})
+      SendInvitation.enqueue(id, job_options: { run_at: Time.now + 5.minutes })
     end
   end
 
   def get_invitees(filter = "accepted")
-    return invitees.send(filter.to_sym) if ["accepted", "tentative", "declined", "no_response"].include?(filter)
+    return invitees.send(filter.to_sym) if [ "accepted", "tentative", "declined", "no_response" ].include?(filter)
     invitees
   end
 
@@ -166,16 +166,16 @@ class Event < ApplicationRecord
 
       # add users from group
       new_event.group.people.active.each do |person|
-        new_event.invitees.build({creator_id: 0, updator_id: 0, status_id: STATUS_NO_RESPONSE, person_id: person.id})
+        new_event.invitees.build({ creator_id: 0, updator_id: 0, status_id: STATUS_NO_RESPONSE, person_id: person.id })
       end
 
       if new_event.save!
         AppLogger.info("New event [#{new_event.name}] has been created")
 
-        SendInvitation.enqueue(new_event.id, job_options: {run_at: new_event.send_invitation_at}) if new_event.send_invitation_at.present?
-        SendCancellation.enqueue(new_event.id, false, job_options: {run_at: new_event.send_cancellation_at}) if new_event.send_cancellation_at.present?
-        SendComplete.enqueue(new_event.id, job_options: {run_at: new_event.until})
-        SendNextEvent.enqueue(new_event.id, job_options: {run_at: new_event.until}) if new_event.next_event.present?
+        SendInvitation.enqueue(new_event.id, job_options: { run_at: new_event.send_invitation_at }) if new_event.send_invitation_at.present?
+        SendCancellation.enqueue(new_event.id, false, job_options: { run_at: new_event.send_cancellation_at }) if new_event.send_cancellation_at.present?
+        SendComplete.enqueue(new_event.id, job_options: { run_at: new_event.until })
+        SendNextEvent.enqueue(new_event.id, job_options: { run_at: new_event.until }) if new_event.next_event.present?
 
       else
         AppLogger.info("New event [#{new_event.name}] could not be created")
@@ -197,7 +197,7 @@ class Event < ApplicationRecord
 
   def is_disabled?(column)
     return true if cancelled? || completed?
-    return true if released? && [:group_id, :when, :until, :send_invitation_at, :required_people, :send_cancellation_at, :next_event, :allow_tentative_selection].include?(column)
+    return true if released? && [ :group_id, :when, :until, :send_invitation_at, :required_people, :send_cancellation_at, :next_event, :allow_tentative_selection ].include?(column)
     false
   end
 

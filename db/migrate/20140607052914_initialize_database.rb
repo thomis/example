@@ -33,7 +33,7 @@ class InitializeDatabase < ActiveRecord::Migration[4.2]
       t.column "updated_at", "timestamp with time zone", null: false
     end
 
-    add_index :statuses, [:type_id, :name], unique: true
+    add_index :statuses, [ :type_id, :name ], unique: true
 
     create_table "types", force: true do |t|
       t.string "type_type", null: false
@@ -44,7 +44,7 @@ class InitializeDatabase < ActiveRecord::Migration[4.2]
       t.column "updated_at", "timestamp with time zone", null: false
     end
 
-    add_index :types, [:type_type, :name], unique: true
+    add_index :types, [ :type_type, :name ], unique: true
 
     create_table :people, force: true do |t|
       t.string "first_name", null: false
@@ -63,8 +63,8 @@ class InitializeDatabase < ActiveRecord::Migration[4.2]
       t.column "updated_at", "timestamp with time zone", null: false
     end
 
-    add_index :people, [:email], unique: true
-    add_index :people, [:nick_name], unique: true
+    add_index :people, [ :email ], unique: true
+    add_index :people, [ :nick_name ], unique: true
 
     create_table :groups, force: true do |t|
       t.string "name", limit: 512, null: false
@@ -75,7 +75,7 @@ class InitializeDatabase < ActiveRecord::Migration[4.2]
       t.column "updated_at", "timestamp with time zone", null: false
     end
 
-    add_index :groups, [:name], unique: true
+    add_index :groups, [ :name ], unique: true
 
     create_table :members, force: true do |t|
       t.integer "person_id", null: false
@@ -84,7 +84,7 @@ class InitializeDatabase < ActiveRecord::Migration[4.2]
       t.column "created_at", "timestamp with time zone", null: false
     end
 
-    add_index :members, [:person_id, :group_id], unique: true
+    add_index :members, [ :person_id, :group_id ], unique: true
 
     execute "alter table members add foreign key (person_id) references people(id) on delete cascade"
     execute "alter table members add foreign key (group_id) references groups(id) on delete cascade"
@@ -105,8 +105,8 @@ class InitializeDatabase < ActiveRecord::Migration[4.2]
       t.column "updated_at", "timestamp with time zone", null: false
     end
 
-    add_index :invitees, [:invitation_key], unique: true
-    add_index :invitees, [:person_id, :event_id], unique: true
+    add_index :invitees, [ :invitation_key ], unique: true
+    add_index :invitees, [ :person_id, :event_id ], unique: true
 
     execute "alter table invitees add foreign key (person_id) references people(id) on delete cascade"
     execute "alter table invitees add foreign key (event_id) references events(id) on delete cascade"
@@ -123,7 +123,7 @@ class InitializeDatabase < ActiveRecord::Migration[4.2]
       t.column "updated_at", "timestamp with time zone", null: false
     end
 
-    add_index :holidays, [:name], unique: true
-    add_index :holidays, [:from], unique: false
+    add_index :holidays, [ :name ], unique: true
+    add_index :holidays, [ :from ], unique: false
   end
 end

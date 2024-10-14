@@ -1,7 +1,7 @@
 namespace :tools do
   desc "shift table sequences"
   task shift_table_sequences: :environment do
-    ["types", "statuses", "people", "members", "groups", "invitees", "events", "holidays", "comments", "teams"].each do |table|
+    [ "types", "statuses", "people", "members", "groups", "invitees", "events", "holidays", "comments", "teams" ].each do |table|
       result = ActiveRecord::Base.connection.exec_query("select max(id) n from #{table}")
       result.each do |row|
         n = row["n"].to_i

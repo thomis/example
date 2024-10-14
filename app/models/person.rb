@@ -6,7 +6,7 @@ class Person < ApplicationRecord
   validates :last_name, :first_name, :nick_name, :email, presence: true
   validates_format_of :email, with: /\A[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,3})|(aero|coop|info|museum|name))\z/
   validates :email, :nick_name, uniqueness: true
-  validates :password, format: {with: /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$/, multiline: true, message: "must have least 6 characters and must include at least one number and one letter"}, allow_nil: true
+  validates :password, format: { with: /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$/, multiline: true, message: "must have least 6 characters and must include at least one number and one letter" }, allow_nil: true
 
   before_create { generate_token(:auth_token) }
 
@@ -26,10 +26,10 @@ class Person < ApplicationRecord
   scope :active, -> { where(status_id: STATUS_ACTIVE) }
   scope :inactive, -> { where(status_id: STATUS_INACTIVE) }
 
-  scope :sorted, -> { order([:last_name, :first_name]) }
+  scope :sorted, -> { order([ :last_name, :first_name ]) }
 
   def self.as_select_list
-    Person.list.sorted.map { |person| [person.full_name, person.id] }
+    Person.list.sorted.map { |person| [ person.full_name, person.id ] }
   end
 
   def inactive?
@@ -80,7 +80,7 @@ class Person < ApplicationRecord
   end
 
   def statistics
-    data = [0, 0, 0, 0]
+    data = [ 0, 0, 0, 0 ]
 
     Person.connection.select_all("select
         i.person_id, i.status_id, count(*) n
@@ -143,7 +143,7 @@ class Person < ApplicationRecord
       if m.size == 1
         m[0].capitalize
       else
-        [m[0].capitalize, m[1].tr("_", " ")]
+        [ m[0].capitalize, m[1].tr("_", " ") ]
       end
     }.flatten.join
   end

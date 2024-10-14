@@ -26,9 +26,9 @@ class Group < ApplicationRecord
 
     # add the missing once
     attributes = []
-    attributes += (new_person_ids - actual_person_ids).to_a.map { |id| {person_id: id, creator_id: creator_id} }
+    attributes += (new_person_ids - actual_person_ids).to_a.map { |id| { person_id: id, creator_id: creator_id } }
     # add the once to delete
-    attributes += (actual_person_ids - new_person_ids).to_a.map { |id| {id: self.members.where(person_id: id).first.id, _destroy: true} }
+    attributes += (actual_person_ids - new_person_ids).to_a.map { |id| { id: self.members.where(person_id: id).first.id, _destroy: true } }
 
     attributes
   end
@@ -37,7 +37,7 @@ class Group < ApplicationRecord
     attributes = []
     members.each do |m|
       next if m.blank?
-      attributes << {person_id: m, creator_id: creator_id}
+      attributes << { person_id: m, creator_id: creator_id }
     end
     attributes
   end

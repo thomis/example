@@ -9,7 +9,7 @@ class Invitee < ApplicationRecord
   scope :tentative, -> { where(status_id: STATUS_TENTATIVE) }
   scope :declined, -> { where(status_id: STATUS_DECLINED) }
   scope :no_response, -> { where(status_id: STATUS_NO_RESPONSE) }
-  scope :accepted_and_tentative, -> { where(status_id: [STATUS_ACCEPTED, STATUS_TENTATIVE]) }
+  scope :accepted_and_tentative, -> { where(status_id: [ STATUS_ACCEPTED, STATUS_TENTATIVE ]) }
   scope :failed_delivery, -> { where("invitation_sent is null and invitation_sent_retry <= 2 and status_id = #{STATUS_NO_RESPONSE}") }
 
   def comments?
@@ -59,7 +59,7 @@ class Invitee < ApplicationRecord
   def self.never_invited
     data = []
     Invitee.connection.select_all("select id from people p where id <> 0 and status_id = 4 and id not in (select person_id from invitees where person_id = p.id) order by last_name, first_name").rows.each do |row|
-      data << [Person.find(row[0]).full_name, 0, row[0]]
+      data << [ Person.find(row[0]).full_name, 0, row[0] ]
     end
     data
   end

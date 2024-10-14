@@ -19,7 +19,7 @@ class ChangeLog
     [
       ChangeLog.new(
         date: Time.now.strftime("%Y-%m-%d %H:%M:%S"),
-        changes: ["Exception while reading [#{filename}]: #{e}"]
+        changes: [ "Exception while reading [#{filename}]: #{e}" ]
       )
     ]
   end

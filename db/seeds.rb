@@ -73,7 +73,7 @@ Group.create_or_update(id: 0, name: "All", note: "Default Group with all people"
 
 Team.create_or_update(id: 1, name: "Example Team", type_id: TYPE_TEAM_DEFAULT, note: "Example Team", creator_id: USER_SYSTEM, updator_id: USER_SYSTEM)
 
-["types", "statuses", "people", "members", "groups", "invitees", "events", "holidays", "comments", "teams"].each do |table|
+[ "types", "statuses", "people", "members", "groups", "invitees", "events", "holidays", "comments", "teams" ].each do |table|
   result = ActiveRecord::Base.connection.exec_query("select max(id) n from #{table}")
   result.each do |row|
     n = row["n"].to_i
