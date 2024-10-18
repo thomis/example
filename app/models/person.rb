@@ -6,7 +6,7 @@ class Person < ApplicationRecord
   validates :last_name, :first_name, :nick_name, :email, presence: true
   validates_format_of :email, with: /\A[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,3})|(aero|coop|info|museum|name))\z/
   validates :email, :nick_name, uniqueness: true
-  validates :password, format: { with: /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$/, multiline: true, message: "must have least 6 characters and must include at least one number and one letter" }, allow_nil: true
+  validates :password, format: { with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{6,}\z/, multiline: true, message: "must have least 6 characters and must include at least one number and one letter" }, allow_nil: true
 
   before_create { generate_token(:auth_token) }
 
