@@ -38,7 +38,7 @@ class Import
 
       Open3.popen3("base64", "-#{option}", DATA_BASE64_FILE, "|", "tar", "xzC", DATA_FOLDER) do |stdin, stdout, stderr, wait_thr|
         return_value = wait_thr.value
-        error_message = [stdout.read, stderr.read].compact.join("; ")
+        error_message = [ stdout.read, stderr.read ].compact.join("; ")
       end
 
       if return_value.success?
@@ -117,7 +117,7 @@ class Import
           # Execute the query with a safely interpolated sequence name and parameter binding for `max_id`
           ActiveRecord::Base.connection.execute(
             ActiveRecord::Base.sanitize_sql_array(
-              ["ALTER SEQUENCE #{sanitized_seq_name} RESTART WITH ?", max_id]
+              [ "ALTER SEQUENCE #{sanitized_seq_name} RESTART WITH ?", max_id ]
             )
           )
 

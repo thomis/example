@@ -54,7 +54,7 @@ class Team < ApplicationRecord
        WHERE team_id = $1
          AND last_response_at < (NOW() - ($2 || ' days')::interval)
        ORDER BY last_response_at DESC",
-      [id, days]
+      [ id, days ]
     ).rows.each do |row|
       data << [ row[0], enforce_time(row[1]), row[2] ]
     end
