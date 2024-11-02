@@ -1,3 +1,5 @@
+require "shellwords"
+
 class Job < ApplicationRecord
   self.table_name = "que_jobs"
 
@@ -47,8 +49,10 @@ class Job < ApplicationRecord
     return false unless system("command -v systemctl > /dev/null")
 
     # Execute the systemctl command to list service unit files and check if the given service exists
-    output = `systemctl list-unit-files --type=service | grep -w #{service_name}.service`
-
+    args = [
+      "#{service_name}.service"
+    ]
+    output = `systemctl list-unit-files --type=service | grep -w #{args.shelljoin}`
     puts "Output: #{output}"
 
     # If the output is empty, the service does not exist; otherwise, it does exist

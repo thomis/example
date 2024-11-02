@@ -48,7 +48,14 @@ class Team < ApplicationRecord
 
   def not_anymore_responders(days = 90)
     data = []
-    Team.connection.select_all("select person_full_name, last_response_at, person_id from v_person_statistics_last_response where team_id = #{id} and last_response_at < (NOW() - interval '#{days} days') order by last_response_at desc").rows.each do |row|
+    Team.connection.select_all(
+      "SELECT person_full_name, last_response_at, person_id
+       FROM v_person_statistics_last_response
+       WHERE team_id = $1
+         AND last_response_at < (NOW() - ($2 || ' days')::interval)
+       ORDER BY last_response_at DESC",
+      [id, days]
+    ).rows.each do |row|
       data << [ row[0], enforce_time(row[1]), row[2] ]
     end
     data
