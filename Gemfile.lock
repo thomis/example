@@ -189,7 +189,7 @@ GEM
       racc (~> 1.4)
     ostruct (0.6.0)
     parallel (1.26.3)
-    parser (3.3.5.1)
+    parser (3.3.6.0)
       ast (~> 2.4.1)
       racc
     pg (1.5.9)
@@ -384,4 +384,4 @@ DEPENDENCIES
   web-console
 
 BUNDLED WITH
-   2.5.18
+   2.5.23
