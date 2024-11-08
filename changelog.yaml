@@ -1,0 +1,11 @@
+- date: '2024-11-08 10:00'
+  changes:
+    - 'Upgrade to rails 8'
+
+- date: '2024-11-01 10:00'
+  changes:
+    - 'Upgrade dependencies'
+
+- date: '2024-10-01 20:00'
+  changes:
+    - 'Initial version with rails 8 beta'

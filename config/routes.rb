@@ -12,5 +12,11 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   resources :events
 
+  resources :logs do
+    collection do
+      get :changelog
+    end
+  end
+
   root "events#index"
 end

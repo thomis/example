@@ -43,7 +43,7 @@ class Import
 
       if return_value.success?
         # delete tmp data file if all is fine
-        system("rm -f", DATA_BASE64_FILE)
+        File.delete(DATA_BASE64_FILE) if File.exist?(DATA_BASE64_FILE)
         logs_part1 << "Dokumente wurden erfolgreich importiert"
       else
         error_message = "Dokumente konnten nicht importiert werden: " + error_message
@@ -106,7 +106,7 @@ class Import
 
         msg = "Sequence [#{seq_name}]: max_id [#{max_id}], next_seq [#{next_seq}]"
 
-        # do we need to ajust the sequence?
+        # do we need to adjust the sequence?
         unless max_id <= next_seq
           # Ensure `max_id` is safely converted to an integer
           max_id = max_id.to_i
