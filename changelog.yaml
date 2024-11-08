@@ -1,3 +1,7 @@
+- date: '2024-11-08 10:30'
+  changes:
+    - 'Change app icon'
+
 - date: '2024-11-08 10:00'
   changes:
     - 'Upgrade to rails 8'
