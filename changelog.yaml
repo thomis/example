@@ -1,3 +1,7 @@
+- date: '2024-11-09 12:00'
+  changes:
+    - 'Upgrade dependencies'
+
 - date: '2024-11-08 11:00'
   changes:
     - 'Change app icon'
