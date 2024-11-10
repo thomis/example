@@ -1,7 +1,7 @@
 <div class="flex-col w-full">
-  <div class="bg-cover bg-center min-h-screen py-12 bg-[url('maracana.jpg')] ">
+  <div class="bg-cover bg-center min-h-screen py-20 bg-[url('maracana.jpg')]">
     <div class="container mx-auto px-5">
-      <div class="text-slate-400 mt-4">Total events: <%= @events.size %></div>
+      <div class="text-center text-5xl text-white font-thin mb-6">Events</div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center gap-6 mt-2">
         <% @events.each do |event| %>
           <a class="w-full h-52 bg-gray-800 bg-opacity-60 backdrop-blur-xl hover:bg-opacity-90 py-4 px-5 rounded-md cursor-pointer text-white font-light"

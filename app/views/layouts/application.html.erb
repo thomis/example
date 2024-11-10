@@ -23,10 +23,11 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="relative">
+    <%= render :partial => "layouts/header" %>
     <main>
       <%= yield %>
-      <%= render :partial => "layouts/footer" %>
     </main>
+    <%= render :partial => "layouts/footer" %>
   </body>
 </html>

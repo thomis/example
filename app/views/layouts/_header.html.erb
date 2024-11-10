@@ -1,0 +1,9 @@
+<header class="fixed top-0 <%= get_header_classes(controller) %> shadow z-50 w-full">
+  <nav class="container mx-auto flex items-center justify-between px-6 py-4 text-slate-400">
+    <a href="/" class="text-xl font-extralight text-yellow-300">Luchtime Looser's</a>
+    <ul class="flex space-x-4 font-extralight">
+      <li><a href="<%= events_path %>" class="hover:text-white hover:bg-slate-600 px-6 py-5">Events</a></li>
+      <li><a href="<%= changelog_logs_path %>" class="hover:text-white hover:bg-slate-600 px-6 py-5">Changelog</a></li>
+    </ul>
+  </nav>
+</header>
