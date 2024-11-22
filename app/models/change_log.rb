@@ -10,7 +10,11 @@ class ChangeLog
 
   def self.parse_from_file(filename)
     YAML.load_file(filename).map { |raw|
-      stamp = Time.parse(raw["date"])
+      begin
+        stamp = Time.parse(raw["date"]).in_time_zone("Europe/Zurich")
+      rescue
+        stamp = Time.now
+      end
 
       ChangeLog.new(
         date: stamp,
