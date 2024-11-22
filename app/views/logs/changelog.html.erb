@@ -11,7 +11,10 @@
           <% @logs.each do |log| %>
             <div class="w-full h-52 bg-gray-800 bg-opacity-60 backdrop-blur-xl hover:bg-opacity-90 py-4 px-5 rounded-md cursor-pointer text-white font-light">
               <div class="flex flex-col h-full gap-2">
-                <div><%= log.date %></div>
+                <div>
+                  <%= time_tag log.date, "data-local": "time", "data-format": "%Y-%m-%d %H:%M" %>,
+                  <%= time_ago_in_words log.date %> ago
+                </div>
                 <ul class="list-[square] list-inside text-slate-400">
                   <% log.changes.each do |entry| %>
                     <li><%= entry %></li>

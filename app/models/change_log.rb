@@ -10,8 +10,10 @@ class ChangeLog
 
   def self.parse_from_file(filename)
     YAML.load_file(filename).map { |raw|
+      stamp = Time.parse(raw["date"])
+
       ChangeLog.new(
-        date: raw["date"],
+        date: stamp,
         changes: raw["changes"]
       )
     }
