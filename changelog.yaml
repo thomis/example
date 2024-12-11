@@ -1,3 +1,7 @@
+- date: '2024-12-11 07:00'
+  changes:
+    - 'Update dependencies (rails)'
+
 - date: '2024-12-03 11:00'
   changes:
     - 'Update dependencies'
