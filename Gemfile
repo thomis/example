@@ -72,6 +72,3 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-
-# there is a bug in cli dotenv 3.1.5
-gem "dotenv", "= 3.1.4"
