@@ -4,12 +4,12 @@
       <div class="text-center text-5xl text-white font-thin mb-6">Changelog</div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center gap-6 mt-2">
         <% if @logs.size == 0 %>
-          <div class="w-full h-52 bg-gray-800 bg-opacity-60 backdrop-blur-xl hover:bg-opacity-90 py-4 px-5 rounded-md cursor-pointer text-white font-light">
+          <div class="w-full h-52 bg-gray-800/60 hover:bg-gray-800/90 backdrop-blur-xl py-4 px-5 rounded-md cursor-pointer text-white font-light">
             No changelog enries found
           </div>
         <% else %>
           <% @logs.each do |log| %>
-            <div class="w-full h-52 bg-gray-800 bg-opacity-60 backdrop-blur-xl hover:bg-opacity-90 py-4 px-5 rounded-md cursor-pointer text-white font-light">
+            <div class="w-full h-52 bg-gray-800/60 hover:bg-gray-800/90 backdrop-blur-xl py-4 px-5 rounded-md cursor-pointer text-white font-light">
               <div class="flex flex-col h-full gap-2">
                 <div>
                   <%= time_tag log.date, "data-local": "time", "data-format": "%Y-%m-%d %H:%M" %>,
